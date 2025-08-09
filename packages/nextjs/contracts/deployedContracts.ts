@@ -6,14 +6,14 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   10143: {
-    YourContract: {
-      address: "0xb0887bAf95DB8Ce6F81767b903C5A74fa0502fBe",
+    ServerLottery: {
+      address: "0xE8Cf0B117E5115dce18B6F10554144D8d22435b6",
       abi: [
         {
           inputs: [
             {
               internalType: "address",
-              name: "_owner",
+              name: "_server",
               type: "address",
             },
           ],
@@ -24,41 +24,61 @@ const deployedContracts = {
           anonymous: false,
           inputs: [
             {
-              indexed: true,
+              indexed: false,
               internalType: "address",
-              name: "greetingSetter",
+              name: "from",
               type: "address",
             },
             {
               indexed: false,
-              internalType: "string",
-              name: "newGreeting",
-              type: "string",
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
             },
+          ],
+          name: "FundsReceived",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
             {
-              indexed: false,
-              internalType: "bool",
-              name: "premium",
-              type: "bool",
+              indexed: true,
+              internalType: "address",
+              name: "winner",
+              type: "address",
             },
             {
               indexed: false,
               internalType: "uint256",
-              name: "value",
+              name: "amount",
               type: "uint256",
             },
           ],
-          name: "GreetingChange",
+          name: "PrizeSent",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "winner",
+              type: "address",
+            },
+          ],
+          name: "WinnerSet",
           type: "event",
         },
         {
           inputs: [],
-          name: "greeting",
+          name: "getBalance",
           outputs: [
             {
-              internalType: "string",
+              internalType: "uint256",
               name: "",
-              type: "string",
+              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -79,7 +99,7 @@ const deployedContracts = {
         },
         {
           inputs: [],
-          name: "premium",
+          name: "prizeClaimed",
           outputs: [
             {
               internalType: "bool",
@@ -91,26 +111,20 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [
-            {
-              internalType: "string",
-              name: "_newGreeting",
-              type: "string",
-            },
-          ],
-          name: "setGreeting",
+          inputs: [],
+          name: "sendPrize",
           outputs: [],
-          stateMutability: "payable",
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
           inputs: [],
-          name: "totalCounter",
+          name: "server",
           outputs: [
             {
-              internalType: "uint256",
+              internalType: "address",
               name: "",
-              type: "uint256",
+              type: "address",
             },
           ],
           stateMutability: "view",
@@ -120,11 +134,118 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "address",
+              name: "_newServer",
+              type: "address",
+            },
+          ],
+          name: "setServer",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_winner",
+              type: "address",
+            },
+          ],
+          name: "setWinner",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "winner",
+          outputs: [
+            {
+              internalType: "address",
               name: "",
               type: "address",
             },
           ],
-          name: "userGreetingCounter",
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          stateMutability: "payable",
+          type: "receive",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+  31337: {
+    ServerLottery: {
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_server",
+              type: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "address",
+              name: "from",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "FundsReceived",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "winner",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "PrizeSent",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "winner",
+              type: "address",
+            },
+          ],
+          name: "WinnerSet",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "getBalance",
           outputs: [
             {
               internalType: "uint256",
@@ -137,9 +258,87 @@ const deployedContracts = {
         },
         {
           inputs: [],
-          name: "withdraw",
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "prizeClaimed",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "sendPrize",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "server",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_newServer",
+              type: "address",
+            },
+          ],
+          name: "setServer",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_winner",
+              type: "address",
+            },
+          ],
+          name: "setWinner",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "winner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {

@@ -3,16 +3,16 @@ import { DeployFunction } from "hardhat-deploy/types";
 import { Contract } from "ethers";
 
 /**
- * Deploys a contract named "YourContract" using the deployer account and
- * constructor arguments set to the deployer address
+ * Deploys a contract named "ServerLottery" using the deployer account and
+ * constructor arguments set to the deployer address as server
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const deployServerLottery: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
-    When deploying to live networks (e.g `yarn deploy --network sepolia`), the deployer account
+    When deploying to live networks (e.g `yarn deploy --network monadTestnet`), the deployer account
     should have sufficient balance to pay for the gas fees for contract creation.
 
     You can generate a random account with `yarn generate` or `yarn account:import` to import your
@@ -22,9 +22,9 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("YourContract", {
+  await deploy("ServerLottery", {
     from: deployer,
-    // Contract constructor arguments
+    // Contract constructor arguments - el deployer será el servidor inicialmente
     args: [deployer],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
@@ -33,12 +33,14 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   });
 
   // Get the deployed contract to interact with it after deploying.
-  const yourContract = await hre.ethers.getContract<Contract>("YourContract", deployer);
-  console.log("👋 Initial greeting:", await yourContract.greeting());
+  const serverLottery = await hre.ethers.getContract<Contract>("ServerLottery", deployer);
+  console.log("👑 Owner:", await serverLottery.owner());
+  console.log("🖥️ Server:", await serverLottery.server());
+  console.log("💰 Balance:", await serverLottery.getBalance());
 };
 
-export default deployYourContract;
+export default deployServerLottery;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
-// e.g. yarn deploy --tags YourContract
-deployYourContract.tags = ["YourContract"];
+// e.g. yarn deploy --tags ServerLottery
+deployServerLottery.tags = ["ServerLottery"];

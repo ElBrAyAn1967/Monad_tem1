@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/ServerLottery.sol": {
+      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.19;\r\ncontract ServerLottery {\r\n    address public owner;\r\n    address public server;\r\n    address public winner;\r\n    bool public prizeClaimed;\r\n    event FundsReceived(address from, uint256 amount);\r\n    event WinnerSet(address indexed winner);\r\n    event PrizeSent(address indexed winner, uint256 amount);\r\n    modifier onlyOwner() {\r\n        require(msg.sender == owner, \"Solo el owner\");\r\n        _;\r\n    }\r\n    modifier onlyServer() {\r\n        require(msg.sender == server, \"Solo el servidor autorizado\");\r\n        _;\r\n    }\r\n    constructor(address _server) {\r\n        owner = msg.sender;\r\n        server = _server;\r\n        prizeClaimed = false;\r\n    }\r\n    // Recibir fondos (por ejemplo, 0.06 ETH para premios)\r\n    receive() external payable {\r\n        emit FundsReceived(msg.sender, msg.value);\r\n    }\r\n    // El servidor designa al ganador\r\n    function setWinner(address _winner) external onlyServer {\r\n        require(_winner != address(0), \"Direccion invalida\");\r\n        require(!prizeClaimed, \"Premio ya fue reclamado\");\r\n        winner = _winner;\r\n        emit WinnerSet(_winner);\r\n    }\r\n    // Enviar todo el premio al ganador\r\n    function sendPrize() external {\r\n        require(msg.sender == winner, \"Solo el ganador puede reclamar\");\r\n        require(!prizeClaimed, \"Premio ya enviado\");\r\n        uint256 amount = address(this).balance;\r\n        require(amount > 0, \"Sin fondos\");\r\n        prizeClaimed = true;\r\n        (bool success, ) = winner.call{value: amount}(\"\");\r\n        require(success, \"Transferencia fallida\");\r\n        emit PrizeSent(winner, amount);\r\n    }\r\n    // Cambiar servidor si es necesario\r\n    function setServer(address _newServer) external onlyOwner {\r\n        require(_newServer != address(0), \"Direccion invalida\");\r\n        server = _newServer;\r\n    }\r\n    // Consultar balance\r\n    function getBalance() external view returns (uint256) {\r\n        return address(this).balance;\r\n    }\r\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
