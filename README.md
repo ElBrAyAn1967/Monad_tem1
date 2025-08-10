@@ -80,6 +80,8 @@ After deploying your smart contract to a testnet or mainnet, you can verify it o
 Scaffold-ETH 2 is configured to use Sourcify for contract verification by default. Sourcify is a decentralized verification platform that supports multiple block explorers.
 
 #### For Monad Testnet
+0.Minteo monad tesnet 
+![Debug Contracts tab](https://faucet.monad.xyz/)
 
 1. Generate a deploy account for Monad:
 ```bash
