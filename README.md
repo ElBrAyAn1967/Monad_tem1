@@ -85,10 +85,11 @@ Scaffold-ETH 2 is configured to use Sourcify for contract verification by defaul
 ```bash
 yarn generate
 ```
-Remember the password here because it will ask for it hard drive when deploying.
+Remember the password here, as it will be required from your local disk when deploying.
 
-Deploy your smart contract on Monad Testnet:
-IMPORTANT: BEFORE DOING SO, SEND THE MONAD TESTNET THAT WE CLAIMED IN THE FAUCET TO THE GENERATE WALLET. OPEN ANOTHER TERMINAL TO RUN THE FOLLOWING COMMAND.
+Deploy your smart contract to the Monad Testnet:
+⚠️ Important: Before proceeding, send the Monad Testnet tokens you claimed from the faucet to the wallet generated with yarn generate.
+Open a separate terminal and run the following command.
 
 2. Deploy your contract to Monad testnet:
 ```bash
