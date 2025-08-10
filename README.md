@@ -81,19 +81,22 @@ Scaffold-ETH 2 is configured to use Sourcify for contract verification by defaul
 
 #### For Monad Testnet
 0. Mintear monad tokens from the page of https://faucet.monad.xyz/
+1. Add the Monad network to your chosen metamask or wallet.
 ![Texto alternativo](https://res.cloudinary.com/daucozfk6/image/upload/v1754792567/Captura_de_pantalla_2025-08-09_202201_tu6zzc.png)
 
-1. Generate a deploy account for Monad:
+2. Generate a deploy account for Monad:
+   Deploy your smart contract to the Monad Testnet.
+   
+⚠️ Important: Before proceeding, send the Monad Testnet tokens you claimed from the faucet to the wallet generated with yarn generate.
+Open a separate terminal and run the following command.
 ```bash
 yarn generate
 ```
 Remember the password here, as it will be required from your local disk when deploying.
 
-Deploy your smart contract to the Monad Testnet.
-⚠️ Important: Before proceeding, send the Monad Testnet tokens you claimed from the faucet to the wallet generated with yarn generate.
-Open a separate terminal and run the following command.
 
-2. Deploy your contract to Monad testnet:
+
+3. Deploy your contract to Monad testnet:
 ```bash
 yarn deploy --network monadTestnet
 ```
