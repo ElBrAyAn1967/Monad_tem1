@@ -92,19 +92,8 @@ yarn deploy --network monadTestnet
 yarn verify --network monadTestnet
 ```
 
-Replace `<CONTRACT_ADDRESS>` with the address of your deployed contract.
 
-#### Configuration
 
-The Sourcify configuration is already set up in `packages/hardhat/hardhat.config.ts`:
-
-```typescript
-sourcify: {
-  enabled: true,
-  apiUrl: "https://sourcify-api-monad.blockvision.org",
-  browserUrl: "https://testnet.monadexplorer.com",
-},
-```
 
 ## Documentation
 
@@ -120,7 +109,7 @@ Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob
 
 
 ---
-## Documentation
+## Smarth Contract 
 
 
 ---
