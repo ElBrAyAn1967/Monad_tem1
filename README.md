@@ -58,13 +58,8 @@ This command deploys a test smart contract to the local network. The contract is
 yarn start
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page.
 
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
 
 
 ## Contract Verification
@@ -77,14 +72,24 @@ Scaffold-ETH 2 is configured to use Sourcify for contract verification by defaul
 
 #### For Monad Testnet
 
-1. Deploy your contract to Monad testnet:
+1. Generate a deploy account for Monad:
+```bash
+yarn generate
+```
+Remember the password here because it will ask for it hard drive when deploying.
+
+Deploy your smart contract on Monad Testnet:
+IMPORTANT: BEFORE DOING SO, SEND THE MONAD TESTNET THAT WE CLAIMED IN THE FAUCET TO THE GENERATE WALLET. OPEN ANOTHER TERMINAL TO RUN THE FOLLOWING COMMAND.
+
+2. Deploy your contract to Monad testnet:
 ```bash
 yarn deploy --network monadTestnet
 ```
 
-2. Verify your contract using the hardhat-deploy plugin:
+
+3. Verify your contract using the hardhat-deploy plugin:
 ```bash
-yarn hardhat-verify --network monadTestnet <CONTRACT_ADDRESS>
+yarn verify --network monadTestnet
 ```
 
 Replace `<CONTRACT_ADDRESS>` with the address of your deployed contract.
@@ -111,4 +116,11 @@ To know more about its features, check out our [website](https://scaffoldeth.io)
 
 We welcome contributions to Scaffold-ETH 2!
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 
+
+
+---
+## Documentation
+
+
+---
